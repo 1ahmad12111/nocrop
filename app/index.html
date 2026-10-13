@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#111318" />
+  <title>NoCrop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="top">
+    <h1>NoCrop</h1>
+    <p class="tag">Post the whole photo or video. Nothing gets cropped.</p>
+  </header>
+
+  <main class="layout">
+    <section class="stage" id="stage">
+      <label class="drop" id="drop">
+        <input type="file" id="file" accept="image/*,video/*" hidden />
+        <span class="drop-icon" aria-hidden="true">＋</span>
+        <strong>Choose a photo or video</strong>
+        <span>or drop it here. It stays on your device.</span>
+      </label>
+      <div class="canvas-wrap" id="canvasWrap" hidden>
+        <canvas id="canvas" aria-label="Preview"></canvas>
+      </div>
+      <div class="video-bar" id="videoBar" hidden>
+        <button type="button" id="playBtn" class="ghost">Play</button>
+        <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Seek" />
+        <span id="time" class="muted">0:00</span>
+      </div>
+    </section>
+
+    <aside class="panel" id="panel" aria-disabled="true">
+      <fieldset>
+        <legend>Size</legend>
+        <div class="chips" id="ratios" role="radiogroup"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Background</legend>
+        <div class="seg" role="radiogroup">
+          <button type="button" data-bg="blur" class="on">Blur</button>
+          <button type="button" data-bg="color">Color</button>
+        </div>
+        <div id="blurOpts">
+          <label class="row">Blur <input type="range" id="blur" min="0" max="1" step="0.01" /></label>
+          <label class="row">Darken <input type="range" id="dim" min="0" max="0.7" step="0.01" /></label>
+        </div>
+        <div id="colorOpts" hidden>
+          <div class="swatches" id="swatches"></div>
+          <label class="row">Custom <input type="color" id="color" /></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Photo</legend>
+        <label class="row">Size <input type="range" id="scale" min="0.3" max="1" step="0.01" /></label>
+        <label class="row">Rounded <input type="range" id="radius" min="0" max="0.5" step="0.01" /></label>
+        <label class="row">Border <input type="range" id="border" min="0" max="1" step="0.01" /></label>
+        <label class="row">Border color <input type="color" id="borderColor" /></label>
+        <label class="check"><input type="checkbox" id="shadow" /> Shadow</label>
+        <p class="hint">Drag the preview to move it. Double-click to center.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Export</legend>
+        <div class="seg" role="radiogroup" id="resSeg">
+          <button type="button" data-res="2" class="on">4K</button>
+          <button type="button" data-res="1">1080p</button>
+        </div>
+        <div class="seg" role="radiogroup" id="fmtSeg">
+          <button type="button" data-fmt="image/png" class="on">PNG (lossless)</button>
+          <button type="button" data-fmt="image/jpeg">JPEG</button>
+        </div>
+        <p class="hint" id="exportInfo"></p>
+      </fieldset>
+
+      <div class="actions">
+        <button type="button" id="exportBtn" class="primary">Save</button>
+        <button type="button" id="shareBtn" class="ghost" hidden>Share</button>
+        <button type="button" id="resetBtn" class="ghost">Reset</button>
+        <button type="button" id="newBtn" class="ghost">New file</button>
+      </div>
+      <p class="status" id="status" role="status"></p>
+    </aside>
+  </main>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
